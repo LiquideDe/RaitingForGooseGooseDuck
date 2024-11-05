@@ -31,16 +31,16 @@ public class RanksCreator : MonoBehaviour
     {
         foreach(PlayerOptions player in _playerOptions)
         {
-            _players.Add(new Player(player));
-            _players[^1].SetTotalGames(_databaseController.ExecuteOrder($"SELECT Count(IsWining) FROM {_players[^1].Name}"));
+            //_players.Add(new Player(player));
+            //_players[^1].SetTotalGames(_databaseController.ExecuteOrder($"SELECT Count(IsWining) FROM {_players[^1].Name}"));
         }
 
         List<string> gooseProfessions = new List<string>() { "Авантюрист", "Астрал" , "Взломщик" , "Детектив", "Знаменитость", "Инженер", "Канадский Гусь", "Линчеватель",
         "Любовник", "Медиум", "Мимик", "Могильщик", "Мститель", "Следопыт", "Смотритель", "Сталкер", "Телохранитель", "Толстосум", "Шериф", "Спаситель", "Лоббист",
-        "Политик"};
+        "Политик", "Прохвост"};
 
         List<string> duckProfessions = new List<string>() { "Ассасин", "Весельчак" , "Каннибал", "Морф", "Невидимка", "Подрывник", "Проповедник", "Профессионал",
-        "Серийный убийца", "Усмиритель", "Хитман", "Шпион", "Эспер", "Гробовщик", "Ниндзя", "Колдун", "Прохвост", "Стукач", "Купидон"};
+        "Серийный убийца", "Усмиритель", "Хитман", "Шпион", "Эспер", "Гробовщик", "Ниндзя", "Колдун", "Стукач", "Купидон"};
         
         foreach(string prof in gooseProfessions)
         {
@@ -99,6 +99,7 @@ public class RanksCreator : MonoBehaviour
 
     IEnumerator TakeDataAndSortPlayers(string profession, TypeProfessions typeProfessions)
     {
+        /*
         foreach (Player player in _players)
         {
             if (typeProfessions == TypeProfessions.Goose)
@@ -156,12 +157,14 @@ public class RanksCreator : MonoBehaviour
                 return cb2.Rate.CompareTo(cb1.Rate);
             }
             );
-
+        */
         yield return CreatePlayers();
     }
 
     IEnumerator CreatePlayers()
     {
+        yield return new WaitForSeconds(1f);
+        /*
         if (_gameObjects.Count > 0)
             yield return CleanScene();
 
@@ -189,7 +192,7 @@ public class RanksCreator : MonoBehaviour
         _gooseFirst.Initialize($"{1} - {_players[0].Name} {_players[0].Rate}%", _players[0].PlayerOptions.FullSize);
         _gooseFirst.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f);*/
     }
 
     IEnumerator CleanScene()

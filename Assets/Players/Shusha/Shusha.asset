@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shusha
   m_EditorClassIdentifier: 
   _namePlayer: Shusha
-  _spriteFullSize: {fileID: 21300000, guid: 13ec28c15783eeb47880cee4b79a1043, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: 1802c6a8d07f7d4489886190183d9356, type: 3}
+  _sprite: {fileID: 21300000, guid: 681de016222144645a21483603b66067, type: 3}
+  _showingName: Shusha

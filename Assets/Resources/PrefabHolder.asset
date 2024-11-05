@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60166e289fd73164b8e8d6e6010533f3, type: 3}
+  m_Name: PrefabHolder
+  m_EditorClassIdentifier: 
+  _mainMenu: {fileID: 6059894014336752367, guid: 92e4fded67254e84fb2765f4077bbcd4, type: 3}
+  _playerRate: {fileID: 9077272332325160030, guid: 0a80a14b4c4b8d14ea54cb5d9f8d0d59, type: 3}
+  _totalRate: {fileID: 42579587843812213, guid: 8f3f9085a812db6429f17a70010030bd, type: 3}

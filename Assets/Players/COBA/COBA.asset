@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: COBA
   m_EditorClassIdentifier: 
   _namePlayer: COBA
-  _spriteFullSize: {fileID: 21300000, guid: ba4a228cb00c1e14fb098b9b17c7e698, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: 23d86390dc7fb56449d27fa2950f54fd, type: 3}
+  _sprite: {fileID: 21300000, guid: dd21b91025ebb8b458b98967d143745b, type: 3}
+  _showingName: "\u041A\u0430\u043D\u0430\u0434\u0441\u043A\u0438\u0439 \u0433\u0443\u0441\u044C"

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Sovalol
   m_EditorClassIdentifier: 
   _namePlayer: Sovalol
-  _spriteFullSize: {fileID: 21300000, guid: 38daf3cf1cc8a6a47bc15d167ca75bf2, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: 96e6e37bf715c3a42a2de78123d581eb, type: 3}
+  _sprite: {fileID: 21300000, guid: a761a390d376b8b4f9f79c349d65cce1, type: 3}
+  _showingName: Sovalol

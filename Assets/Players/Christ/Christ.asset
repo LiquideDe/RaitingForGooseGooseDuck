@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Christ
   m_EditorClassIdentifier: 
   _namePlayer: Christ
-  _spriteFullSize: {fileID: 21300000, guid: d2de1e15f3136e943979c391e8b35061, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: 8a3d24c1df83e6147b57819fcabc7e54, type: 3}
+  _sprite: {fileID: 21300000, guid: ee31c8448e9ec7d4f8adcec3333700cd, type: 3}
+  _showingName: Christopher

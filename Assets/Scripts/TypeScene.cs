@@ -1,0 +1,1 @@
+public enum TypeScene { MainMenu, Player, TotalRaitePlayers}

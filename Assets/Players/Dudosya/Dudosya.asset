@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dudosya
   m_EditorClassIdentifier: 
   _namePlayer: Dudosya
-  _spriteFullSize: {fileID: 21300000, guid: d649491dd70784c4cad5c659842e5bf0, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: be6c1f46d209c20469e583d4c52e4d73, type: 3}
+  _sprite: {fileID: 21300000, guid: b08db8c434ec31e46abd573d648c208d, type: 3}
+  _showingName: Dudosya

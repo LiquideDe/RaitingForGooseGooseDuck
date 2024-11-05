@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Liquide
   m_EditorClassIdentifier: 
   _namePlayer: Liquide
-  _spriteFullSize: {fileID: 21300000, guid: 4c2b063253942c041b10c84f124c4b0d, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: 64c2e7ebd6c337443877a61bbd42690d, type: 3}
+  _sprite: {fileID: 21300000, guid: c2086e59fc66141478d40c94707d12d9, type: 3}
+  _showingName: Liquide Parasite

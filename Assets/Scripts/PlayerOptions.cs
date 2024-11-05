@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlayerOptions : ScriptableObject
 {
     [SerializeField] private string _namePlayer;
-    [SerializeField] private Sprite _spriteFullSize;
-    [SerializeField] private Sprite _spriteHalfSize;
+    [SerializeField] private Sprite _sprite;
+    [SerializeField] private string _showingName;
 
     public string Name => _namePlayer;
-    public Sprite FullSize => _spriteFullSize;
-    public Sprite HalfSize => _spriteHalfSize;
+    public Sprite Sprite => _sprite;
+    public string ShowingName => _showingName; 
 }

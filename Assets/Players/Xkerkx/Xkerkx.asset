@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Xkerkx
   m_EditorClassIdentifier: 
   _namePlayer: XKerkX
-  _spriteFullSize: {fileID: 21300000, guid: a2178c97c9ac69841993c94971e55968, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: 2ab8c3a848972624b8138d06a951b70b, type: 3}
+  _sprite: {fileID: 21300000, guid: 7f9f9e0b7e127d54d9982930da02b727, type: 3}
+  _showingName: "\u041A\u0430\u0440\u043B"

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Kicky
   m_EditorClassIdentifier: 
   _namePlayer: Kicky
-  _spriteFullSize: {fileID: 21300000, guid: 7538b3e5f833d8945b59b5c1e961b22e, type: 3}
-  _spriteHalfSize: {fileID: 21300000, guid: e4421492cd6df484fa9138d1f31365d1, type: 3}
+  _sprite: {fileID: 21300000, guid: 9a981b01b6330d74dbe5f44efe8d4afb, type: 3}
+  _showingName: Kicky
