@@ -11,7 +11,7 @@ public class PlayerRatingPresenter : RatePresenter, IPresenter
     public void Initialize(PlayerRatingView view)
     {
         _view = view;
-        base.Initialize(view);
+        base.Initialize(view, _playersHolder.Players.Count);
         
     }
     public override void ShowRate()
@@ -28,12 +28,8 @@ public class PlayerRatingPresenter : RatePresenter, IPresenter
         int totalKicks = _database.ExecuteOrder($"SELECT Count(IsWining) FROM {player.Name} WHERE FinalState = 'Кикнули'");
         _view.TextKicked.text = $"Всего утопили - {totalKicks}. ({Math.Round((float)totalKicks / (float)totalGames * 100, 2)}%)";
 
-        List<string> peaceProfessions = new List<string>() { "Авантюрист", "Астрал" , "Взломщик" , "Детектив", "Знаменитость", "Инженер", "Канадский Гусь", "Линчеватель",
-        "Любовник", "Медиум", "Мимик", "Могильщик", "Мститель", "Следопыт", "Смотритель", "Сталкер", "Телохранитель", "Толстосум", "Шериф", "Спаситель", "Лоббист",
-        "Политик", "Прохвост", "Додо"};
-
         int kickedAtPeacfull = 0;
-        foreach(string proffession in peaceProfessions)        
+        foreach(string proffession in Professions.PeacefulProfessions)        
             kickedAtPeacfull += _database.ExecuteOrder($"SELECT Count(FinalState) FROM {player.Name} WHERE FinalState = 'Кикнули' AND Profession = '{proffession}'");
         
         _view.TextKickedAsPeacefull.text = $"На мирной роли - {kickedAtPeacfull}. ({Math.Round((float)kickedAtPeacfull / (float)totalKicks * 100, 2)}%)";

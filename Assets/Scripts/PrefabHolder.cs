@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PrefabHolder", menuName = "Holder/PrefabHolder")]
 public class PrefabHolder : ScriptableObject
 {
-    [SerializeField] private GameObject _mainMenu, _playerRate, _totalRate;
+    [SerializeField] private GameObject _mainMenu, _playerRate, _totalRate, _property;
     public GameObject Get(TypeScene typeScene)
     {
         switch (typeScene)
@@ -18,6 +18,9 @@ public class PrefabHolder : ScriptableObject
 
             case TypeScene.TotalRaitePlayers:
                 return _totalRate; 
+
+                case TypeScene.Property:
+                    return _property;
 
             default:
                 throw new System.Exception($"Не нашли {typeScene}");

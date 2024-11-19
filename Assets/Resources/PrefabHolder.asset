@@ -15,3 +15,4 @@ MonoBehaviour:
   _mainMenu: {fileID: 6059894014336752367, guid: 92e4fded67254e84fb2765f4077bbcd4, type: 3}
   _playerRate: {fileID: 9077272332325160030, guid: 0a80a14b4c4b8d14ea54cb5d9f8d0d59, type: 3}
   _totalRate: {fileID: 42579587843812213, guid: 8f3f9085a812db6429f17a70010030bd, type: 3}
+  _property: {fileID: 5454489023501002247, guid: 74f31c4c70932c241a63d79fae5b1cb4, type: 3}

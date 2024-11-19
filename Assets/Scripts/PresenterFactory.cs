@@ -20,6 +20,9 @@ public class PresenterFactory
             case TypeScene.TotalRaitePlayers:
                 return _diContainer.Instantiate<TotalRatingPresenter>();
 
+            case TypeScene.Property:
+                return _diContainer.Instantiate<PropertyPresenter>();
+
             default:
                 throw new ArgumentException(nameof(type));
         }

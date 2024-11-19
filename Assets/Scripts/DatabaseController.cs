@@ -4,7 +4,6 @@ using UnityEngine;
 using Mono.Data.Sqlite;
 using System.Data;
 using System;
-using Unity.VisualScripting.Dependencies.Sqlite;
 
 public class DatabaseController
 {

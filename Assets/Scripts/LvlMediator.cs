@@ -11,8 +11,7 @@ public class LvlMediator
     public LvlMediator(LvlFactory lvlFactory, PresenterFactory presenterFactory)
     {
         _lvlFactory = lvlFactory;
-        _presenterFactory = presenterFactory;
-        MainMenu();        
+        _presenterFactory = presenterFactory;        
     }
 
     public void StartRating() => MainMenu();
@@ -24,6 +23,7 @@ public class LvlMediator
 
         menuPresenter.GoToTotalRate += ShowTotalRate;
         menuPresenter.GoToGooseRate += ShowGooseRate;
+        menuPresenter.GoToProperty += ShowProperty;
 
         menuPresenter.Initialize(mainMenuView);
     }
@@ -44,5 +44,14 @@ public class LvlMediator
 
         presenter.Exit += MainMenu;
         presenter.Initialize(view);
+    }
+
+    private void ShowProperty()
+    {
+        PropertyView propertyView = _lvlFactory.Get(TypeScene.Property).GetComponent<PropertyView>();
+        PropertyPresenter propertyPresenter = (PropertyPresenter)_presenterFactory.Get(TypeScene.Property);
+
+        propertyPresenter.Exit += MainMenu;
+        propertyPresenter.Initialize(propertyView);
     }
 }

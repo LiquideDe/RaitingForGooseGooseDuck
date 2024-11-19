@@ -15,7 +15,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
     public void Initialize(TotalRatingView view)
     {
         _view = view;
-        base.Initialize(view);
+        base.Initialize(view, _nameRatings.Count);
     }
 
     public override void ShowRate()
@@ -23,13 +23,14 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         _database.StartConnection();
         List<Player> players = new List<Player>();
         for(int i = 0; i < _playersHolder.Players.Count; i++)
-        {
+            if (_playersHolder.Players[i].IsPlayerShowing)
+            {
             players.Add(new Player());
-            players[i].Name = _playersHolder.Players[i].Name;
-            players[i].ShowingName = _playersHolder.Players[i].ShowingName;
-            players[i].Sprite = _playersHolder.Players[i].Sprite;
-            StateMachineRate(players[i]);
-        }
+            players[^1].Name = _playersHolder.Players[i].Name;
+            players[^1].ShowingName = _playersHolder.Players[i].ShowingName;
+            players[^1].Sprite = _playersHolder.Players[i].Sprite;
+            StateMachineRate(players[^1]);
+            }
         List<Player> sortedList = players.OrderByDescending(o => o.WinRate).ToList();
         for (int i = 0; i < sortedList.Count; i++)
             sortedList[i].Place = i + 1;
@@ -39,12 +40,6 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
 
     private void StateMachineRate(Player player)
     {
-        List<string> peaceProfessions = new List<string>() { "Авантюрист", "Астрал" , "Взломщик" , "Детектив", "Знаменитость", "Инженер", "Канадский Гусь", "Линчеватель",
-        "Любовник", "Медиум", "Мимик", "Могильщик", "Мститель", "Следопыт", "Смотритель", "Сталкер", "Телохранитель", "Толстосум", "Шериф", "Спаситель", "Лоббист",
-        "Политик", "Прохвост"};
-
-        List<string> duckProffessions = new List<string>() {"Хитман", "Каннибал", "Морф", "Усмиритель", "Профессионал",
-        "Шпион", "Ассасин", "Весельчак", "Подрывник", "Ниндзя", "Гробовщик", "Невидимка", "Серийный убийца", "Колдун", "Эспер", "Проповедник", "Стукач"};
 
         if (_nameRatings[_currentLvl] == "Чаще всего был Додо")
         {
@@ -74,7 +69,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         {
             MoreOftenProffession(player, "Канадский Гусь");
         }
-        else if (_nameRatings[_currentLvl] == "Чаще всего убивали")
+        else if (_nameRatings[_currentLvl] == "Кого чаще всего убивали")
         {
             MoreOftenDies(player);
         }
@@ -88,19 +83,19 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         }
         else if (_nameRatings[_currentLvl] == "Чаще всего был мирным")
         {
-            CalculateGooseGames(player, peaceProfessions);
+            CalculateGooseGames(player, Professions.GooseProfessions);
         }
         else if (_nameRatings[_currentLvl] == "Лучший мирный гусь")
         {
-            BestGoose(player, peaceProfessions);
+            BestGoose(player, Professions.GooseProfessions);
         }
         else if (_nameRatings[_currentLvl] == "Чаще всего был Уткой")
         {
-            CalculateGooseGames(player, duckProffessions);
+            CalculateGooseGames(player, Professions.DuckProfessions);
         }
         else if (_nameRatings[_currentLvl] == "Самая эффективная Уточка")
         {
-            BestGoose(player, duckProffessions);
+            BestGoose(player, Professions.DuckProfessions);
         }
         else if (_nameRatings[_currentLvl] == "Лучший игрок")
         {
@@ -131,13 +126,9 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
     }
 
     private void KickedAsPeaceful(Player player)
-    {
-        List<string> peaceProfessions = new List<string>() { "Авантюрист", "Астрал" , "Взломщик" , "Детектив", "Знаменитость", "Инженер", "Канадский Гусь", "Линчеватель",
-        "Любовник", "Медиум", "Мимик", "Могильщик", "Мститель", "Следопыт", "Смотритель", "Сталкер", "Телохранитель", "Толстосум", "Шериф", "Спаситель", "Лоббист",
-        "Политик", "Прохвост", "Додо"};
-
+    {   
         int kickedAtPeacfull = 0;
-        foreach (string proffession in peaceProfessions)
+        foreach (string proffession in Professions.PeacefulProfessions)
             kickedAtPeacfull += _database.ExecuteOrder($"SELECT Count(FinalState) FROM {player.Name} WHERE FinalState = 'Кикнули' AND Profession = '{proffession}'");
 
         Kicked(player);

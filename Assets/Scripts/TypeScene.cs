@@ -1,1 +1,1 @@
-public enum TypeScene { MainMenu, Player, TotalRaitePlayers}
+public enum TypeScene { MainMenu, Player, TotalRaitePlayers, Property}

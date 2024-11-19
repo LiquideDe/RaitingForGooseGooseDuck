@@ -8,8 +8,9 @@ public abstract class RatePresenter
 {
     public event Action Exit;
     protected DatabaseController _database;
-    private AudioManager _audioManager;
+    protected AudioManager _audioManager;
     protected PlayersHolder _playersHolder;
+    private int _amountLvls;
     protected int _currentLvl = 0;
     private View _viewForDestroy;
 
@@ -19,10 +20,11 @@ public abstract class RatePresenter
         _audioManager = audioManager;
         _playersHolder = playersHolder;
     }
-    public virtual void Initialize(View view)
+    public virtual void Initialize(View view, int amountLvls)
     {
         _database = new DatabaseController();
         _viewForDestroy = view;
+        _amountLvls = amountLvls;
         Subscribe();
         ShowRate();
     }
@@ -44,7 +46,7 @@ public abstract class RatePresenter
 
     private void ExitDown()
     {
-        _audioManager.PlayClick();
+        _audioManager.PlayCancel();
         Unscribe();
         _viewForDestroy.DestroyView();
         Exit?.Invoke();
@@ -54,7 +56,7 @@ public abstract class RatePresenter
     {
         _audioManager.PlayClick();
         if (_currentLvl == 0)
-            _currentLvl = _playersHolder.Players.Count - 1;
+            _currentLvl = _amountLvls - 1;
         else
             _currentLvl--;
 
@@ -64,7 +66,7 @@ public abstract class RatePresenter
     private void NextPlayer()
     {
         _audioManager.PlayClick();
-        if (_currentLvl + 1 < _playersHolder.Players.Count)
+        if (_currentLvl + 1 < _amountLvls)
             _currentLvl++;
         else
             _currentLvl = 0;
