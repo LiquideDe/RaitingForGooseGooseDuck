@@ -92,6 +92,8 @@ public class MainMenuPresenter : IPresenter
         _view.TextNeutral.transform.position = new Vector3(_view.TextNeutral.transform.position.x, 400 * neutralWinRate);
         _view.TextDuck.transform.position = new Vector3(_view.TextDuck.transform.position.x, 400 * duckWinRate);
         databaseController.CloseConnection();
+
+
     }
 
     private void Exit() => Application.Quit();

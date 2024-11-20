@@ -18,13 +18,13 @@ public class PropertyPresenter : RatePresenter, IPresenter
         _view.Initialize(_playersHolder.Players);
     }
 
-    private void PlayerToggleChange(string arg1, bool arg2)
+    private void PlayerToggleChange(string name, bool isShowing)
     {
         _audioManager.PlayClick();
         for(int i = 0; i < _playersHolder.Players.Count; i++)        
-            if(string.Compare(arg1, _playersHolder.Players[i].ShowingName, true) == 0)
+            if(string.Compare(name, _playersHolder.Players[i].ShowingName, true) == 0)
             {
-                _playersHolder.Players[i].IsPlayerShowing = arg2;
+                _playersHolder.Players[i].IsPlayerShowing = isShowing;
             }              
     }
 }
