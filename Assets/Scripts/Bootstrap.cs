@@ -17,6 +17,7 @@ public class Bootstrap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
+        Professions.FillLists();
         foreach (var player in _playersHolder.Players)
             player.IsPlayerShowing = true;
         _mediator.StartRating();

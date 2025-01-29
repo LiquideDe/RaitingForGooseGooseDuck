@@ -9,11 +9,11 @@ public class PlayerPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textNameAndPlace;
     [SerializeField] private Image _image;
 
-    public void Initialize(Player player)
+    public void Initialize(Player player, string ed)
     {
         gameObject.SetActive(true);
         _image.sprite = player.Sprite;
-        _textNameAndPlace.text = $"{player.Place} - {player.ShowingName} ({player.WinRate}%)";
+        _textNameAndPlace.text = $"{player.Place} - {player.ShowingName} ({player.WinRate}{ed})";
     }
 
     public void DestroyPanel() => Destroy(gameObject);

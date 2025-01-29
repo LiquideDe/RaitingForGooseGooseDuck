@@ -66,9 +66,9 @@ public class MainMenuPresenter : IPresenter
         DatabaseController databaseController = new DatabaseController();
         databaseController.StartConnection();
         int totalGames = databaseController.ExecuteOrder("SELECT Count(Number) FROM Games");
-        int gooseWin = databaseController.ExecuteOrder("SELECT Count(Number) FROM Games WHERE Win = '√ÛÒË'");
-        int duckWin = databaseController.ExecuteOrder("SELECT Count(Number) FROM Games WHERE Win = 'ÕÂÈÚ‡Î'");
-        int neutralWin = databaseController.ExecuteOrder("SELECT Count(Number) FROM Games WHERE Win = '”ÚÍË'");
+        int gooseWin = databaseController.ExecuteOrder("SELECT Count(Number) FROM Games WHERE Win = '–ì—É—Å–∏'");
+        int duckWin = databaseController.ExecuteOrder("SELECT Count(Number) FROM Games WHERE Win = '–£—Ç–∫–∏'");
+        int neutralWin = databaseController.ExecuteOrder("SELECT Count(Number) FROM Games WHERE Win = '–ù–µ–π—Ç—Ä–∞–ª'");
 
         float gooseWinRate = (float)gooseWin / totalGames;
         float neutralWinRate = (float)neutralWin / totalGames;

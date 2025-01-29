@@ -23,7 +23,7 @@ public class PrefabHolder : ScriptableObject
                     return _property;
 
             default:
-                throw new System.Exception($"Не нашли {typeScene}");
+                throw new System.Exception($"РќРµ РЅР°С€Р»Рё {typeScene}");
         }
     }
 }

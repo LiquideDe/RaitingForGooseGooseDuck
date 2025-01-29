@@ -11,7 +11,7 @@ public class DatabaseController
 
     public void StartConnection()
     {
-        _connection = new SqliteConnection($"Data Source={Application.dataPath}/StreamingAssets/goose.db");
+        _connection = new SqliteConnection($"Data Source={Application.dataPath}/StreamingAssets/gooseWinter25.db");
         _connection.Open();
     }
 
@@ -27,7 +27,29 @@ public class DatabaseController
             return Convert.ToInt32(sqliteDataReader.GetValue(0));
         }
         else
-            throw new System.Exception($"��� �� ����� �� ���. ({command})");
+            throw new System.Exception($"Не получилось выполнить команду. ({command})");
+    }
+
+    public List<string> GetProfessions(string name)
+    {
+        if (_connection.State == ConnectionState.Open)
+        {
+            SqliteCommand sqliteCommand = new SqliteCommand();
+            sqliteCommand.Connection = _connection;
+            sqliteCommand.CommandText = $"SELECT NameProf FROM Professions WHERE SideConflict = '{name}'";
+            SqliteDataReader sqliteDataReader = sqliteCommand.ExecuteReader();
+            List<string> names = new List<string>();
+            while (sqliteDataReader.Read())
+            {
+                names.Add(sqliteDataReader.GetString(0));
+            }
+            return names;
+        }
+        else
+        {
+            Debug.LogError($"Не пришли профессии");
+            return null;           
+        }
     }
 
     public void CloseConnection() => _connection.Close();

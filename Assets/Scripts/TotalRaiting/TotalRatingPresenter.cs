@@ -7,10 +7,11 @@ using System.Linq;
 public class TotalRatingPresenter : RatePresenter, IPresenter
 {
     private TotalRatingView _view;
+    private string _ed = "%";
 
-    private List<string> _nameRatings = new List<string>() {"Чаще всего был Додо", "Лучший Додо","Чаще всего был Голубем", "Лучший голубь"
-        ,"Чаще всего был Пеликаном", "Лучший Пеликан", "Чаще всего был Канадским гусем","Кого чаще всего убивали", "Чаще всего топили", "Чаще топили на мирной роли", 
-        "Чаще всего был мирным", "Лучший мирный гусь", "Чаще всего был Уткой", "Самая эффективная Уточка", "Лучший игрок"};
+    private List<string> _nameRatings = new List<string>() {"Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» Р”РѕРґРѕ", "Р›СѓС‡С€РёР№ Р”РѕРґРѕ","Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» Р“РѕР»СѓР±РµРј", "Р›СѓС‡С€РёР№ РіРѕР»СѓР±СЊ"
+        ,"Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РџРµР»РёРєР°РЅРѕРј", "Р›СѓС‡С€РёР№ РџРµР»РёРєР°РЅ", "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РљР°РЅР°РґСЃРєРёРј РіСѓСЃРµРј","РљРѕРіРѕ С‡Р°С‰Рµ РІСЃРµРіРѕ СѓР±РёРІР°Р»Рё", "Р§Р°С‰Рµ РІСЃРµРіРѕ С‚РѕРїРёР»Рё", "Р§Р°С‰Рµ С‚РѕРїРёР»Рё РЅР° РјРёСЂРЅРѕР№ СЂРѕР»Рё", 
+        "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РјРёСЂРЅС‹Рј", "Р›СѓС‡С€РёР№ РјРёСЂРЅС‹Р№ РіСѓСЃСЊ", "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РЈС‚РєРѕР№", "РЎР°РјР°СЏ СЌС„С„РµРєС‚РёРІРЅР°СЏ РЈС‚РѕС‡РєР°", "Р›СѓС‡С€РёР№ РёРіСЂРѕРє", "РќР°С€Рё РїРµСЂРµРґРѕРІРёРєРё", "РЎР°РјС‹Р№ РѕСЃС‚СЂС‹Р№ РЅРѕР¶РёС‡РµРє"};
 
     public void Initialize(TotalRatingView view)
     {
@@ -23,85 +24,111 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         _database.StartConnection();
         List<Player> players = new List<Player>();
         for(int i = 0; i < _playersHolder.Players.Count; i++)
-            if (_playersHolder.Players[i].IsPlayerShowing)
+        {
+            int games = _database.ExecuteOrder($"SELECT Count(IsWining) FROM {_playersHolder.Players[i].Name}");
+            if (_playersHolder.Players[i].IsPlayerShowing && games > 50)
             {
-            players.Add(new Player());
-            players[^1].Name = _playersHolder.Players[i].Name;
-            players[^1].ShowingName = _playersHolder.Players[i].ShowingName;
-            players[^1].Sprite = _playersHolder.Players[i].Sprite;
-            StateMachineRate(players[^1]);
+                players.Add(new Player());
+                players[^1].Name = _playersHolder.Players[i].Name;
+                players[^1].ShowingName = _playersHolder.Players[i].ShowingName;
+                players[^1].Sprite = _playersHolder.Players[i].Sprite;
+                StateMachineRate(players[^1]);
             }
+        }
+
+
+            
         List<Player> sortedList = players.OrderByDescending(o => o.WinRate).ToList();
         for (int i = 0; i < sortedList.Count; i++)
             sortedList[i].Place = i + 1;
-        _view.ShowRate(_nameRatings[_currentLvl], sortedList);
+        _view.ShowRate(_nameRatings[_currentLvl], sortedList, _ed);
+        _ed = "%";
         _database.CloseConnection();
     }
 
     private void StateMachineRate(Player player)
     {
 
-        if (_nameRatings[_currentLvl] == "Чаще всего был Додо")
+        if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» Р”РѕРґРѕ")
         {
-            MoreOftenProffession(player, "Додо");
+            MoreOftenProffession(player, "Р”РѕРґРѕ");
         }
-        else if(_nameRatings[_currentLvl] == "Лучший Додо")
+        else if (_nameRatings[_currentLvl] == "Р›СѓС‡С€РёР№ Р”РѕРґРѕ")
         {
-            BestInProffession(player, "Додо");
+            BestInProffession(player, "Р”РѕРґРѕ");
         }
-        else if(_nameRatings[_currentLvl] == "Чаще всего был Голубем")
+        else if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» Р“РѕР»СѓР±РµРј")
         {
-            MoreOftenProffession(player, "Голубь");
+            MoreOftenProffession(player, "Р“РѕР»СѓР±СЊ");
         }
-        else if (_nameRatings[_currentLvl] == "Лучший голубь")
+        else if (_nameRatings[_currentLvl] == "Р›СѓС‡С€РёР№ РіРѕР»СѓР±СЊ")
         {
-            BestInProffession(player, "Голубь");
+            BestInProffession(player, "Р“РѕР»СѓР±СЊ");
         }
-        else if (_nameRatings[_currentLvl] == "Чаще всего был Пеликаном")
+        else if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РџРµР»РёРєР°РЅРѕРј")
         {
-            MoreOftenProffession(player, "Пеликан");
+            MoreOftenProffession(player, "РџРµР»РёРєР°РЅ");
         }
-        else if (_nameRatings[_currentLvl] == "Лучший Пеликан")
+        else if (_nameRatings[_currentLvl] == "Р›СѓС‡С€РёР№ РџРµР»РёРєР°РЅ")
         {
-            BestInProffession(player, "Пеликан");
+            BestInProffession(player, "РџРµР»РёРєР°РЅ");
         }
-        else if (_nameRatings[_currentLvl] == "Чаще всего был Канадским гусем")
+        else if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РљР°РЅР°РґСЃРєРёРј РіСѓСЃРµРј")
         {
-            MoreOftenProffession(player, "Канадский Гусь");
+            MoreOftenProffession(player, "РљР°РЅР°РґСЃРєРёР№ Р“СѓСЃСЊ");
         }
-        else if (_nameRatings[_currentLvl] == "Кого чаще всего убивали")
+        else if (_nameRatings[_currentLvl] == "РљРѕРіРѕ С‡Р°С‰Рµ РІСЃРµРіРѕ СѓР±РёРІР°Р»Рё")
         {
             MoreOftenDies(player);
         }
-        else if (_nameRatings[_currentLvl] == "Чаще всего топили")
+        else if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ РІСЃРµРіРѕ С‚РѕРїРёР»Рё")
         {
             Kicked(player);
         }
-        else if (_nameRatings[_currentLvl] == "Чаще топили на мирной роли")
+        else if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ С‚РѕРїРёР»Рё РЅР° РјРёСЂРЅРѕР№ СЂРѕР»Рё")
         {
             KickedAsPeaceful(player);
         }
-        else if (_nameRatings[_currentLvl] == "Чаще всего был мирным")
+        else if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РјРёСЂРЅС‹Рј")
         {
             CalculateGooseGames(player, Professions.GooseProfessions);
         }
-        else if (_nameRatings[_currentLvl] == "Лучший мирный гусь")
+        else if (_nameRatings[_currentLvl] == "Р›СѓС‡С€РёР№ РјРёСЂРЅС‹Р№ РіСѓСЃСЊ")
         {
             BestGoose(player, Professions.GooseProfessions);
         }
-        else if (_nameRatings[_currentLvl] == "Чаще всего был Уткой")
+        else if (_nameRatings[_currentLvl] == "Р§Р°С‰Рµ РІСЃРµРіРѕ Р±С‹Р» РЈС‚РєРѕР№")
         {
             CalculateGooseGames(player, Professions.DuckProfessions);
         }
-        else if (_nameRatings[_currentLvl] == "Самая эффективная Уточка")
+        else if (_nameRatings[_currentLvl] == "РЎР°РјР°СЏ СЌС„С„РµРєС‚РёРІРЅР°СЏ РЈС‚РѕС‡РєР°")
         {
             BestGoose(player, Professions.DuckProfessions);
         }
-        else if (_nameRatings[_currentLvl] == "Лучший игрок")
+        else if (_nameRatings[_currentLvl] == "Р›СѓС‡С€РёР№ РёРіСЂРѕРє")
         {
             BestOfTheBest(player);
         }
-        
+        else if (_nameRatings[_currentLvl] == "РќР°С€Рё РїРµСЂРµРґРѕРІРёРєРё")
+            { BestCummunist(player);
+            _ed = " РєСѓР±РєРѕРІ";
+        }
+        else if (_nameRatings[_currentLvl] == "РЎР°РјС‹Р№ РѕСЃС‚СЂС‹Р№ РЅРѕР¶РёС‡РµРє")
+            { 
+            BestKiller(player);
+            _ed = " РЅРѕР¶РµР№";
+        }
+
+    }
+
+    private void BestKiller(Player player)
+    {
+        player.WinRate = _database.ExecuteOrder($"SELECT Count(Nozhik) FROM {player.Name} WHERE Nozhik = 1");
+    }
+
+    private void BestCummunist(Player player)
+    {
+        player.WinRate = _database.ExecuteOrder($"SELECT Count(Kubok) FROM {player.Name} WHERE Kubok = 1");
     }
 
     private void MoreOftenProffession(Player player, string proffession)
@@ -121,7 +148,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
     private void Kicked(Player player)
     {
         player.Games = _database.CountAllGames(player.Name);
-        player.WinGames = _database.ExecuteOrder($"SELECT Count(IsWining) FROM {player.Name} WHERE FinalState = 'Кикнули'");
+        player.WinGames = _database.ExecuteOrder($"SELECT Count(IsWining) FROM {player.Name} WHERE FinalState = 'РљРёРєРЅСѓР»Рё'");
         player.WinRate = (float)Math.Round((float)player.WinGames / (float)player.Games * 100, 2);
     }
 
@@ -129,7 +156,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
     {   
         int kickedAtPeacfull = 0;
         foreach (string proffession in Professions.PeacefulProfessions)
-            kickedAtPeacfull += _database.ExecuteOrder($"SELECT Count(FinalState) FROM {player.Name} WHERE FinalState = 'Кикнули' AND Profession = '{proffession}'");
+            kickedAtPeacfull += _database.ExecuteOrder($"SELECT Count(FinalState) FROM {player.Name} WHERE FinalState = 'РљРёРєРЅСѓР»Рё' AND Profession = '{proffession}'");
 
         Kicked(player);
         player.Games = player.WinGames;
@@ -140,7 +167,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
     private void MoreOftenDies(Player player)
     {
         player.Games = _database.CountAllGames(player.Name);
-        player.WinGames = _database.ExecuteOrder($"SELECT Count(FinalState) FROM {player.Name} WHERE FinalState = 'Убили'");
+        player.WinGames = _database.ExecuteOrder($"SELECT Count(FinalState) FROM {player.Name} WHERE FinalState = 'РЈР±РёР»Рё'");
         player.WinRate = (float)Math.Round((float)player.WinGames / (float)player.Games * 100, 2);
     }
 
@@ -176,6 +203,5 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         player.WinGames = _database.ExecuteOrder($"SELECT Count(IsWining) FROM {player.Name} WHERE IsWining = 1");
         player.WinRate = (float)Math.Round((float)player.WinGames / (float)player.Games * 100, 2);
     }
-
 
 }
