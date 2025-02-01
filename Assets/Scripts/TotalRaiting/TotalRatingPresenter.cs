@@ -10,8 +10,8 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
     private string _ed = "%";
 
     private List<string> _nameRatings = new List<string>() {"Чаще всего был Додо", "Лучший Додо","Чаще всего был Голубем", "Лучший голубь"
-        ,"Чаще всего был Пеликаном", "Лучший Пеликан", "Чаще всего был Канадским гусем","Кого чаще всего убивали", "Чаще всего топили", "Чаще топили на мирной роли", 
-        "Чаще всего был мирным", "Лучший мирный гусь", "Чаще всего был Уткой", "Самая эффективная Уточка", "Лучший игрок", "Наши передовики", "Самый острый ножичек"};
+        ,"Чаще всего был Пеликаном", "Лучший Пеликан Жмаф-Жмаф","Чаще всего был Соколом","Лучший Сокол","Чаще всего был Стервятником","Лучший Стервятник", "Чаще всего был Канадским гусем","Кого чаще всего убивали", "Чаще всего топили", "Чаще топили на мирной роли", 
+        "Чаще всего был мирным", "Гордилась наша деревня (лучший гусь)", "Чаще всего был Уткой", "Самая хладнокровная Уточка", "Лучший игрок", "Наши передовики", "Самый острый ножичек"};
 
     public void Initialize(TotalRatingView view)
     {
@@ -69,7 +69,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         {
             MoreOftenProffession(player, "Пеликан");
         }
-        else if (_nameRatings[_currentLvl] == "Лучший Пеликан")
+        else if (_nameRatings[_currentLvl] == "Лучший Пеликан Жмаф-Жмаф")
         {
             BestInProffession(player, "Пеликан");
         }
@@ -93,7 +93,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         {
             CalculateGooseGames(player, Professions.GooseProfessions);
         }
-        else if (_nameRatings[_currentLvl] == "Лучший мирный гусь")
+        else if (_nameRatings[_currentLvl] == "Гордилась наша деревня (лучший гусь)")
         {
             BestGoose(player, Professions.GooseProfessions);
         }
@@ -101,7 +101,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         {
             CalculateGooseGames(player, Professions.DuckProfessions);
         }
-        else if (_nameRatings[_currentLvl] == "Самая эффективная Уточка")
+        else if (_nameRatings[_currentLvl] == "Самая хладнокровная Уточка")
         {
             BestGoose(player, Professions.DuckProfessions);
         }
@@ -118,6 +118,23 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
             BestKiller(player);
             _ed = " ножей";
         }
+        else if (_nameRatings[_currentLvl] == "Чаще всего был Соколом")
+        {
+            MoreOftenProffession(player, "Сокол");
+        }
+        else if (_nameRatings[_currentLvl] == "Лучший Сокол")
+        {
+            BestInProffession(player, "Сокол");
+        }
+        else if (_nameRatings[_currentLvl] == "Чаще всего был Стервятником")
+        {
+            MoreOftenProffession(player, "Стервятник");
+        }
+        else if (_nameRatings[_currentLvl] == "Лучший Стервятник")
+        {
+            BestInProffession(player, "Стервятник");
+        }
+
 
     }
 
