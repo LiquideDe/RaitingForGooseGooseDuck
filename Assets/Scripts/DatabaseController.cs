@@ -4,6 +4,8 @@ using UnityEngine;
 using Mono.Data.Sqlite;
 using System.Data;
 using System;
+using System.IO;
+using System.Linq;
 
 public class DatabaseController
 {
@@ -11,8 +13,17 @@ public class DatabaseController
 
     public void StartConnection()
     {
-        _connection = new SqliteConnection($"Data Source={Application.dataPath}/StreamingAssets/gooseWinter25.db");
-        _connection.Open();
+        List<string> paths = Directory.GetFiles($"{Application.dataPath}/StreamingAssets","*.db").ToList();
+        if(paths.Count > 0)
+        {
+            _connection = new SqliteConnection($"Data Source={paths[0]}");
+            _connection.Open();
+        }
+        else
+        {
+            throw new Exception("Не нашли базу данных");
+        }
+        
     }
 
     public int ExecuteOrder(string command)
