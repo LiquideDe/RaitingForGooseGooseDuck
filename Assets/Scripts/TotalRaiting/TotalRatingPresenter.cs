@@ -26,7 +26,7 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
         for(int i = 0; i < _playersHolder.Players.Count; i++)
         {
             int games = _database.ExecuteOrder($"SELECT Count(IsWining) FROM {_playersHolder.Players[i].Name}");
-            if (_playersHolder.Players[i].IsPlayerShowing && games > 50)
+            if (_playersHolder.Players[i].IsPlayerShowing)
             {
                 players.Add(new Player());
                 players[^1].Name = _playersHolder.Players[i].Name;
