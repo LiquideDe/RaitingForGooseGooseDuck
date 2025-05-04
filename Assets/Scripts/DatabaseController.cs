@@ -8,8 +8,9 @@ using System.IO;
 using System.Linq;
 
 public class DatabaseController
-{
-    SqliteConnection _connection;
+{    
+    private SqliteConnection _connection;
+    public int AmountMinimumGames { get; private set; }
 
     public void StartConnection()
     {
@@ -81,5 +82,16 @@ public class DatabaseController
     {
         string command = $"SELECT Count(IsWining) FROM {namePlayer} WHERE Profession = '{nameProffession}' AND IsWining = 1";
         return ExecuteOrder(command);
+    }
+
+    public void CalculateMinimumGames()
+    {
+        if (_connection.State == ConnectionState.Open)
+        {
+            string command = $"SELECT Count(Number) FROM Games";
+            int totalGames = ExecuteOrder(command);
+            AmountMinimumGames = (int)(totalGames * 0.4);
+            Debug.Log($"minimum games = {AmountMinimumGames}");
+        }
     }
 }

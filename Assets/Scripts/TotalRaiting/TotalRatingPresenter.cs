@@ -22,11 +22,12 @@ public class TotalRatingPresenter : RatePresenter, IPresenter
     public override void ShowRate()
     {
         _database.StartConnection();
+        _database.CalculateMinimumGames();
         List<Player> players = new List<Player>();
         for(int i = 0; i < _playersHolder.Players.Count; i++)
         {
             int games = _database.ExecuteOrder($"SELECT Count(IsWining) FROM {_playersHolder.Players[i].Name}");
-            if (_playersHolder.Players[i].IsPlayerShowing)
+            if (_playersHolder.Players[i].IsPlayerShowing && games >= _database.AmountMinimumGames)
             {
                 players.Add(new Player());
                 players[^1].Name = _playersHolder.Players[i].Name;
